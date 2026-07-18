@@ -61,7 +61,7 @@
             color: #8ce09b;
         }
 
-        /* Hero-Bereich (Haupt-Banner) */
+        /* Hero-Bereich */
         .hero {
             text-align: center;
             padding: 140px 20px;
@@ -125,7 +125,7 @@
             border-radius: 2px;
         }
 
-        /* Dienstleistungen (Grid) */
+        /* Dienstleistungen */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -195,7 +195,7 @@
             border-left: 4px solid #8ce09b;
         }
 
-        /* FAQ Bereich (Akkordeon-Stil mit Details) */
+        /* FAQ Bereich */
         .faq-item {
             background-color: #25422e;
             margin-bottom: 15px;
@@ -345,10 +345,10 @@
             <p><strong>Jakobs Diverse Dienstleistungen</strong> steht für unkomplizierte Lösungen aus einer Hand. Statt für jede Arbeit eine andere Firma zu suchen, bekommen Sie bei uns den vollen Service für verschiedenste Aufgaben rund um Ihre Immobilie.</p>
         </div>
         <div class="vorteile-list">
-            <div class="vortell-item">✔ Schnelle Terminvergabe</div>
-            <div class="vortell-item">✔ Transparente Festpreise</div>
-            <div class="vortell-item">✔ Zuverlässig & Pünktlich</div>
-            <div class="vortell-item">✔ Regionale Nähe</div>
+            <div class="vorteil-item">✔ Schnelle Terminvergabe</div>
+            <div class="vorteil-item">✔ Transparente Festpreise</div>
+            <div class="vorteil-item">✔ Zuverlässig & Pünktlich</div>
+            <div class="vorteil-item">✔ Regionale Nähe</div>
         </div>
     </section>
 
@@ -378,28 +378,28 @@
             <div class="contact-method">
                 <h3>Direktkontakt</h3>
                 <p><strong>Telefon:</strong> +49 (0) 123 456789</p>
-                <p><strong>E-Mail:</strong> info@jakobs-dienstleistungen.de</p>
+                <p><strong>E-Mail:</strong> jakob@twotigers.de</p>
                 <p style="margin-top: 20px;"><em>Schreiben Sie uns oder nutzen Sie das Formular für ein unverbindliches Angebot. Wir melden uns innerhalb von 24 Stunden bei Ihnen!</em></p>
             </div>
 
             <div>
-                <form action="#" method="POST">
-                    <input type="text" name="name" placeholder="Ihr Name" required>
-                    <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
-                    <input type="tel" name="telefon" placeholder="Ihre Telefonnummer (optional)">
+                <form id="contactForm">
+                    <input type="text" id="name" placeholder="Ihr Name" required>
+                    <input type="email" id="email" placeholder="Ihre E-Mail-Adresse" required>
+                    <input type="tel" id="telefon" placeholder="Ihre Telefonnummer (optional)">
                     
-                    <select name="dienstleistung" required>
+                    <select id="dienstleistung" required>
                         <option value="" disabled selected>Gewünschte Dienstleistung wählen...</option>
-                        <option value="handwerk">Handwerk & Montage</option>
-                        <option value="garten">Haus & Garten</option>
-                        <option value="reinigung">Reinigungsservice</option>
-                        <option value="entruempelung">Entrümpelung & Transport</option>
-                        <option value="sonstiges">Sonstiges</option>
+                        <option value="Handwerk & Montage">Handwerk & Montage</option>
+                        <option value="Haus & Garten">Haus & Garten</option>
+                        <option value="Reinigungsservice">Reinigungsservice</option>
+                        <option value="Entrümpelung & Transport">Entrümpelung & Transport</option>
+                        <option value="Sonstiges">Sonstiges</option>
                     </select>
 
-                    <textarea name="nachricht" rows="5" placeholder="Beschreiben Sie kurz Ihr Vorhaben..." required></textarea>
+                    <textarea id="nachricht" rows="5" placeholder="Beschreiben Sie kurz Ihr Vorhaben..." required></textarea>
                     
-                    <button type="submit">Anfrage absenden</button>
+                    <button type="submit">Anfrage per E-Mail senden</button>
                 </form>
             </div>
 
@@ -410,5 +410,35 @@
         <p>&copy; 2026 Jakobs Diverse Dienstleistungen. Alle Rechte vorbehalten. | Impressum | Datenschutz</p>
     </footer>
 
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das normale Neuladen der Seite
+
+            // Werte aus den Feldern auslesen
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const telefon = document.getElementById('telefon').value || 'Nicht angegeben';
+            const dienstleistung = document.getElementById('dienstleistung').value;
+            const nachricht = document.getElementById('nachricht').value;
+
+            // Betreffzeile für die E-Mail
+            const subject = encodeURIComponent('Neue Anfrage: ' + dienstleistung);
+
+            // Textinhalt der E-Mail zusammenbauen
+            let bodyText = `Neue Anfrage über die Webseite:\n\n`;
+            bodyText += `Name: ${name}\n`;
+            bodyText += `E-Mail: ${email}\n`;
+            bodyText += `Telefon: ${telefon}\n`;
+            bodyText += `Gewünschte Leistung: ${dienstleistung}\n\n`;
+            bodyText += `Beschreibung:\n${nachricht}`;
+
+            const body = encodeURIComponent(bodyText);
+
+            // Mailto-Link aufrufen (öffnet das E-Mail-Programm des Kunden)
+            window.location.href = `mailto:jakob@twotigers.de?subject=${subject}&body=${body}`;
+        });
+    </script>
+
 </body>
 </html>
+4
